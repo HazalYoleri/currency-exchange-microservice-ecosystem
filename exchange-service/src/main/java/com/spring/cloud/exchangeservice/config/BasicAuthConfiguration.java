@@ -1,6 +1,7 @@
 package com.spring.cloud.exchangeservice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class BasicAuthConfiguration extends WebSecurityConfigurerAdapter {
+    @Value("${spring.security.user.name}")
+    private String user;
+
+    @Value("${spring.security.user.password}")
+    private String password;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
@@ -26,8 +33,8 @@ public class BasicAuthConfiguration extends WebSecurityConfigurerAdapter {
             throws Exception
     {
         authentication.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("nimda"))
+                .withUser(user)
+                .password(passwordEncoder().encode(password))
                 .authorities("ROLE_USER");
     }
 
