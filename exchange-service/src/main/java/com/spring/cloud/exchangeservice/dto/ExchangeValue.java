@@ -10,17 +10,17 @@ import java.util.Map;
 public class ExchangeValue {
 
     private String base;
-    private Map<String,String> rates;
+    private Map<String,BigDecimal> rates;
     private Date date;
 
     public ExchangeValue() {
     }
 
-    public ExchangeValue(Long id, String from, String to, BigDecimal conversionValue) {
+    public ExchangeValue(Date date,  Map<String,BigDecimal> rates, String base) {
         super();
-        this.setBase(getBase());
-        this.setRates(getRates());
-        this.setDate(getDate());
+        this.base=base;
+        this.rates=rates;
+        this.date=date;
     }
 
 
@@ -32,11 +32,11 @@ public class ExchangeValue {
         this.base = base;
     }
 
-    public Map<String, String> getRates() {
+    public Map<String, BigDecimal> getRates() {
         return rates;
     }
 
-    public void setRates(Map<String, String> rates) {
+    public void setRates(Map<String, BigDecimal> rates) {
         this.rates = rates;
     }
 

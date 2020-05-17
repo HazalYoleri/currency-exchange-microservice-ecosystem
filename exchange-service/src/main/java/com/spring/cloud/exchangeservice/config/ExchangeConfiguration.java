@@ -45,8 +45,8 @@ public class ExchangeConfiguration {
     //:TODO NEED ERROR HANDLİNG
     @Bean
     public RestTemplate restTemplate() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        return this.restTemplateBuilder(this.insecureSslContext()).setConnectTimeout(Duration.ofSeconds(500))
-                .setReadTimeout(Duration.ofSeconds(500))
+        return this.restTemplateBuilder(this.insecureSslContext()).setConnectTimeout(Duration.ofSeconds(1000))
+                .setReadTimeout(Duration.ofSeconds(1000))
                 .build();
     }
 
