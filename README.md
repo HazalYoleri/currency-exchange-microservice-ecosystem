@@ -7,7 +7,7 @@ Currency Exchange Microservice Ecosystem is a basic example for microservice arc
 Docker implementation is on the way :)
 
 ## Overview
-![architecture](https://user-images.githubusercontent.com/39515623/82160622-603c2d80-989f-11ea-80c5-8a2ef7696fe1.png)
+![architecture](https://user-images.githubusercontent.com/39515623/82160875-f3c22e00-98a0-11ea-8551-042bab5af60b.png)
 ```
 import foobar
 
