@@ -42,6 +42,16 @@ In this project Zipkin connected to the in-memory database. All the microservice
 RabbitMQ is a message-queueing software also known as a message broker or queue manager.
 
 In this project, RabbitMQ works with Zipkin and Cloud Bus for log tracing and reloading central configuration.
+* #### Hystrix
+Hystrix is a library that helps you control the interactions between these distributed services by adding latency tolerance and fault tolerance logic. 
+
+
+* #### Feign
+Feign is a declarative web service client that makes writing web service clients easier. We use the different annotations provided by the Spring framework such as Requestmapping, @PathVariable in a Java interface to define the abstract implementation of our actual API and the Feign internally process these annotations into a templatized request to the actual web service.
+
+* #### Ribbon
+Ribbon is a client-side load balancer that gives you a lot of control over the behavior of HTTP and TCP clients. Feign already uses Ribbon, so, if you use @FeignClient, you have already client-side load balancing. But in this project even if we have a feign client in calculation-service, there is also ribbon implementation too.
+
 ![architecture](https://user-images.githubusercontent.com/39515623/82160875-f3c22e00-98a0-11ea-8551-042bab5af60b.png)
 ```
 import foobar
