@@ -8,7 +8,7 @@ Docker implementation is on the way :)
 
 ## Overview
 
-Currency exchange microservices-based system consists of the following modules:
+Currency exchange microservices-based system consists of the following technologies:
 
 * ### Zuul Proxy
 
