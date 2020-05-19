@@ -28,19 +28,19 @@ Eureka Server is in itself a microservice to which all other microservices regis
 
 By using Spring Boot Actuator, we can refresh clients. However, in the cloud environment, we would need to go to every single client and reload configuration by accessing actuator endpoint.
 
-To solve this problem, this project uses Spring Cloud Bus.
-
-//wip..
+To solve this problem, this project uses Spring Cloud Bus with rabbitMQ as a message broker. If any configuration changes in config-store, and invoke `/bus-refresh `endpoint, all of the consumers will go and ask for a configuration from config-server.
 
 * ### Tracing - Zipkin
 Zipkin is an open source project that provides mechanisms for sending, receiving, storing, and visualizing traces. This allows us to correlate activity between servers and get a much clearer picture of exactly what is happening in our services.
 
 In this project Zipkin connected to the in-memory database. All the microservices will put the messages in the RabbitMQ server and  Zipkin consumes the messages from the RabbitMQ server.
 
+![zipkin](https://user-images.githubusercontent.com/39515623/82371753-64915380-9a23-11ea-8009-19d94ae5bfaa.png)
+
+
 * #### RabbitMQ
 
 RabbitMQ is a message-queueing software also known as a message broker or queue manager.
-
 In this project, RabbitMQ works with Zipkin and Cloud Bus for log tracing and reloading central configuration.
 * #### Hystrix
 Hystrix is a library that helps you control the interactions between these distributed services by adding latency tolerance and fault tolerance logic. 
