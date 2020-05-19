@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @EnableZuulProxy
 @SpringBootApplication
+
 public class ZuulProxyApplication {
 
     @Bean

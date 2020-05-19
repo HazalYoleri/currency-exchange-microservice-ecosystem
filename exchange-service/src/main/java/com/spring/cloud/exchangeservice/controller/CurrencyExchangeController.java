@@ -4,13 +4,12 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.spring.cloud.exchangeservice.dto.ExchangeValue;
 import com.spring.cloud.exchangeservice.service.CurrencyExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.*;
 
 
 @RequestMapping("/currency")
+@RefreshScope
 @RestController
 
 public class CurrencyExchangeController {
@@ -47,4 +46,6 @@ public class CurrencyExchangeController {
         return new ExchangeValue();
 
     }
+
+
 }

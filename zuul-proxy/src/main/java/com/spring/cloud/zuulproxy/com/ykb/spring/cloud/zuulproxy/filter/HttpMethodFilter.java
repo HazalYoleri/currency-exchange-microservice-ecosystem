@@ -31,7 +31,7 @@ public class HttpMethodFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        if (request.getMethod().equals(HttpMethod.DELETE)) {
+      if (request.getMethod().equals(HttpMethod.DELETE)) {
             ctx.setResponseStatusCode(400);
             ctx.setResponseBody("Delete is not supported");
             ctx.setSendZuulResponse(false);

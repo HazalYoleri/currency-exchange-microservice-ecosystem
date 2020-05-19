@@ -6,13 +6,14 @@ import com.spring.cloud.calculationservice.service.CalculationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/exchange")
-
+@RefreshScope
 public class CalculationController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

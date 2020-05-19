@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableHystrixDashboard
-@SpringBootApplication()
+@SpringBootApplication
 public class CalculationServiceApplication {
     @Bean
     public Sampler defaultSampler() {
