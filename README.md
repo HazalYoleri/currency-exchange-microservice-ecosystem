@@ -52,6 +52,7 @@ Feign is a declarative web service client that makes writing web service clients
 * #### Ribbon
 Ribbon is a client-side load balancer that gives you a lot of control over the behavior of HTTP and TCP clients. Feign already uses Ribbon, so, if you use @FeignClient, you have already client-side load balancing. But in this project even if we have a feign client in calculation-service, there is also ribbon implementation too.
 
+* ## Architecture
 ![architecture](https://user-images.githubusercontent.com/39515623/82160875-f3c22e00-98a0-11ea-8551-042bab5af60b.png)
 ```
 import foobar
