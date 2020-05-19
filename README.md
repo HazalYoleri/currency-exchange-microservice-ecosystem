@@ -54,6 +54,47 @@ Ribbon is a client-side load balancer that gives you a lot of control over the b
 
 * ## Architecture
 ![architecture](https://user-images.githubusercontent.com/39515623/82160875-f3c22e00-98a0-11ea-8551-042bab5af60b.png)
+* ### Exchange-Service
+
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| GET      | /currency/from/{from}/to/{to} |Request specific exchange rates by setting from and to parameter. |
+| GET      | /currency/{date}/from/{from}/to/{to}"    |   Request specific historical exchange rates by setting from and to parameter |
+| GET | /currency      |    Get the latest foreign exchange reference rates.|
+
+* ### Calculation-Service
+
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| POST      | /exchange/today  |Calculates according to the exchange rate |
+
+#####
+
+```python
+Example Request:
+
+curl -X POST \
+  http://localhost:8085/calculation-service/exchange/today \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'from=USD&to=TRY&value=132'
+```
+
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| POST      | /exchange/historical    | Calculates according to the exchange rate and date |
+
+```python
+Example Request:
+
+curl -X POST \
+  http://localhost:8085/calculation-service/exchange/today \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'from=USD&to=TRY&value=132&date=2015-12-01'
+```
+
+#### WIP:Swagger Implementation
+
+
 ```
 import foobar
 
