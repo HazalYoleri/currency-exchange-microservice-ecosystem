@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class FeignClientConfiguration {
-    @Value("${spring.security.user.name}")
-    private String user;
+  @Value("${spring.security.user.name}")
+  private String user;
 
-    @Value("${spring.security.user.password}")
-    private String password;
+  @Value("${spring.security.user.password}")
+  private String password;
 
-    @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor(user, password);
-    }
+  @Bean
+  public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
+    return new BasicAuthRequestInterceptor(user, password);
+  }
 }

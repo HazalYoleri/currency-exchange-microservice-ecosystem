@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Bean;
 @EnableHystrixDashboard
 @SpringBootApplication
 public class CalculationServiceApplication {
-    @Bean
-    public Sampler defaultSampler() {
-        return Sampler.ALWAYS_SAMPLE;
-    }
+  @Bean
+  public Sampler defaultSampler() {
+    return Sampler.ALWAYS_SAMPLE;
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(CalculationServiceApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(CalculationServiceApplication.class, args);
+  }
 
 }
