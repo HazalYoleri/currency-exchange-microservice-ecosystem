@@ -12,30 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 public class HttpMethodFilter extends ZuulFilter {
 
 
-    @Override
-    public String filterType() {
-        return FilterConstants.PRE_TYPE;
-    }
+  @Override
+  public String filterType() {
+    return FilterConstants.PRE_TYPE;
+  }
 
-    @Override
-    public int filterOrder() {
-        return 1;
-    }
+  @Override
+  public int filterOrder() {
+    return 1;
+  }
 
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
+  @Override
+  public boolean shouldFilter() {
+    return true;
+  }
 
-    @Override
-    public Object run() {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-      if (request.getMethod().equals(HttpMethod.DELETE)) {
-            ctx.setResponseStatusCode(400);
-            ctx.setResponseBody("Delete is not supported");
-            ctx.setSendZuulResponse(false);
-        }
-        return null;
+  @Override
+  public Object run() {
+    RequestContext ctx = RequestContext.getCurrentContext();
+    HttpServletRequest request = ctx.getRequest();
+    if (request.getMethod().equals(HttpMethod.DELETE)) {
+      ctx.setResponseStatusCode(400);
+      ctx.setResponseBody("Delete is not supported");
+      ctx.setSendZuulResponse(false);
     }
+    return null;
+  }
 }

@@ -13,13 +13,13 @@ import org.springframework.context.annotation.Bean;
 
 public class ZuulProxyApplication {
 
-    @Bean
-    public Sampler defaultSampler() {
-        return Sampler.ALWAYS_SAMPLE;
-    }
+  @Bean
+  public Sampler defaultSampler() {
+    return Sampler.ALWAYS_SAMPLE;
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(ZuulProxyApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(ZuulProxyApplication.class, args);
+  }
 
 }
