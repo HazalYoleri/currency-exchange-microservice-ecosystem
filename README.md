@@ -28,19 +28,19 @@ Eureka Server is in itself a microservice to which all other microservices regis
 
 By using Spring Boot Actuator, we can refresh clients. However, in the cloud environment, we would need to go to every single client and reload configuration by accessing actuator endpoint.
 
-To solve this problem, this project uses Spring Cloud Bus.
-
-//wip..
+To solve this problem, this project uses Spring Cloud Bus with rabbitMQ as a message broker. If any configuration changes in config-store, and invoke `/bus-refresh `endpoint, all of the consumers will go and ask for a configuration from config-server.
 
 * ### Tracing - Zipkin
 Zipkin is an open source project that provides mechanisms for sending, receiving, storing, and visualizing traces. This allows us to correlate activity between servers and get a much clearer picture of exactly what is happening in our services.
 
 In this project Zipkin connected to the in-memory database. All the microservices will put the messages in the RabbitMQ server and  Zipkin consumes the messages from the RabbitMQ server.
 
+![zipkin](https://user-images.githubusercontent.com/39515623/82371753-64915380-9a23-11ea-8009-19d94ae5bfaa.png)
+
+
 * #### RabbitMQ
 
 RabbitMQ is a message-queueing software also known as a message broker or queue manager.
-
 In this project, RabbitMQ works with Zipkin and Cloud Bus for log tracing and reloading central configuration.
 * #### Hystrix
 Hystrix is a library that helps you control the interactions between these distributed services by adding latency tolerance and fault tolerance logic. 
@@ -52,14 +52,47 @@ Feign is a declarative web service client that makes writing web service clients
 * #### Ribbon
 Ribbon is a client-side load balancer that gives you a lot of control over the behavior of HTTP and TCP clients. Feign already uses Ribbon, so, if you use @FeignClient, you have already client-side load balancing. But in this project even if we have a feign client in calculation-service, there is also ribbon implementation too.
 
+* ## Architecture
 ![architecture](https://user-images.githubusercontent.com/39515623/82160875-f3c22e00-98a0-11ea-8551-042bab5af60b.png)
-```
-import foobar
+* ### Exchange-Service
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| GET      | /currency/from/{from}/to/{to} |Request specific exchange rates by setting from and to parameter. |
+| GET      | /currency/{date}/from/{from}/to/{to}"    |   Request specific historical exchange rates by setting from and to parameter |
+| GET | /currency      |    Get the latest foreign exchange reference rates.|
+
+* ### Calculation-Service
+
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| POST      | /exchange/today  |Calculates according to the exchange rate |
+
+#####
+
+```python
+Example Request:
+
+curl -X POST \
+  http://localhost:8085/calculation-service/exchange/today \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'from=USD&to=TRY&value=132'
 ```
+
+| Method        | Path           | Description  |
+| ------------- |-------------| -----|
+| POST      | /exchange/historical    | Calculates according to the exchange rate and date |
+
+```python
+Example Request:
+
+curl -X POST \
+  http://localhost:8085/calculation-service/exchange/today \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'from=USD&to=TRY&value=132&date=2015-12-01'
+```
+
+#### WIP:Swagger Implementation
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
