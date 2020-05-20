@@ -13,33 +13,51 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class CurrencyExchangeService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    RestTemplate restTemplate;
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ExchangeValue getCurrenciesOfToday() {
-        String url = new UrlBuilder().addBase(Constants.LATEST_URL).build();
-        return this.restTemplate.getForObject(url, ExchangeValue.class);
+  @Autowired
+  RestTemplate restTemplate;
 
-    }
 
-    public ExchangeValue getHistoricalCurrency(String date) {
-        String url = new UrlBuilder().addBase(Constants.HISTORICAL_URL).append(date).build();
-        return this.restTemplate.getForObject(url, ExchangeValue.class);
+  public ExchangeValue getCurrenciesOfToday() {
+    String url = new UrlBuilder().addBase(Constants.LATEST_URL).build();
+    return this.restTemplate
+        .getForObject(url, ExchangeValue.class);
 
-    }
+  }
 
-    public ExchangeValue convertCurrency(String from, String to) {
-        String url = new UrlBuilder().addBase(Constants.LATEST_URL).addParameter(Constants.BASE, from).addParameter(Constants.SYMBOLS, to).build();
-        logger.info("uri" + url);
-        return this.restTemplate.getForObject(url, ExchangeValue.class);
 
-    }
+  public ExchangeValue getHistoricalCurrency(String date) {
+    String url = new UrlBuilder().addBase(Constants.HISTORICAL_URL).append(date).build();
+    return this.restTemplate
+        .getForObject(url, ExchangeValue.class);
 
-    public ExchangeValue convertHistoricalCurrency(String date, String from, String to) {
-        String url = new UrlBuilder().addBase(Constants.HISTORICAL_URL).append(date).addParameter(Constants.BASE, from).addParameter(Constants.SYMBOLS, to).build();
-        return this.restTemplate.getForObject(url, ExchangeValue.class);
+  }
 
-    }
+
+  public ExchangeValue convertCurrency(String from, String to) {
+    String url = new UrlBuilder()
+        .addBase(Constants.LATEST_URL)
+        .addParameter(Constants.BASE, from)
+        .addParameter(Constants.SYMBOLS, to)
+        .build();
+    logger.info("uri" + url);
+    return this.restTemplate
+        .getForObject(url, ExchangeValue.class);
+
+  }
+
+
+  public ExchangeValue convertHistoricalCurrency(String date, String from, String to) {
+    String url = new UrlBuilder()
+        .addBase(Constants.HISTORICAL_URL)
+        .append(date)
+        .addParameter(Constants.BASE, from)
+        .addParameter(Constants.SYMBOLS, to)
+        .build();
+    return this.restTemplate.getForObject(url, ExchangeValue.class);
+
+
+  }
 }
 

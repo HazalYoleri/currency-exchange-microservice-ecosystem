@@ -22,32 +22,35 @@ import java.time.Duration;
 public class ExchangeConfiguration {
 
 
-    @Bean
-    public RestTemplateBuilder restTemplateBuilder(@Autowired SSLContext sslContext) {
-        return new RestTemplateBuilder() {
-            @Override
-            public ClientHttpRequestFactory buildRequestFactory() {
-                return new HttpComponentsClientHttpRequestFactory(
-                        HttpClients.custom().setSSLSocketFactory(
-                                new SSLConnectionSocketFactory(sslContext
-                                        , NoopHostnameVerifier.INSTANCE)).build());
-            }
-        };
-    }
+  @Bean
+  public RestTemplateBuilder restTemplateBuilder(@Autowired SSLContext sslContext) {
+    return new RestTemplateBuilder() {
+      @Override
+      public ClientHttpRequestFactory buildRequestFactory() {
+        return new HttpComponentsClientHttpRequestFactory(
+            HttpClients.custom().setSSLSocketFactory(
+                new SSLConnectionSocketFactory(sslContext,
+                    NoopHostnameVerifier.INSTANCE)).build());
+      }
+    };
+  }
 
-    @Bean
-    public SSLContext insecureSslContext() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-        return SSLContexts.custom()
-                .loadTrustMaterial(null, (x509Certificates, s) -> true)
-                .build();
-    }
+  @Bean
+  public SSLContext insecureSslContext()
+      throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+    return SSLContexts.custom()
+        .loadTrustMaterial(null, (x509Certificates, s) -> true)
+        .build();
+  }
 
-    //:TODO NEED ERROR HANDLİNG
-    @Bean
-    public RestTemplate restTemplate() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        return this.restTemplateBuilder(this.insecureSslContext()).setConnectTimeout(Duration.ofSeconds(1000))
-                .setReadTimeout(Duration.ofSeconds(1000))
-                .build();
-    }
+  //:TODO NEED ERROR HANDLİNG
+  @Bean
+  public RestTemplate restTemplate()
+      throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+    return this.restTemplateBuilder(this.insecureSslContext())
+        .setConnectTimeout(Duration.ofSeconds(1000))
+        .setReadTimeout(Duration.ofSeconds(1000))
+        .build();
+  }
 
 }

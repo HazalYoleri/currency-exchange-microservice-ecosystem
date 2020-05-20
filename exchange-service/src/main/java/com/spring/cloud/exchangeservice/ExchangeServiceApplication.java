@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Bean;
 @EnableCircuitBreaker
 @SpringBootApplication
 public class ExchangeServiceApplication {
-    @Bean
-    public Sampler defaultSampler() {
-        return Sampler.ALWAYS_SAMPLE;
-    }
+  @Bean
+  public Sampler defaultSampler() {
+    return Sampler.ALWAYS_SAMPLE;
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(ExchangeServiceApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(ExchangeServiceApplication.class, args);
+  }
 
 }
