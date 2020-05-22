@@ -1,4 +1,4 @@
-package com.spring.cloud.zuulproxy.com.ykb.spring.cloud.zuulproxy.filter;
+package com.cloud.zuulproxy.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

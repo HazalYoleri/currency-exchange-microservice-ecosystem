@@ -1,4 +1,4 @@
-package com.spring.cloud.zuulproxy;
+package com.cloud.zuulproxy;
 
 import brave.sampler.Sampler;
 import org.springframework.boot.SpringApplication;
