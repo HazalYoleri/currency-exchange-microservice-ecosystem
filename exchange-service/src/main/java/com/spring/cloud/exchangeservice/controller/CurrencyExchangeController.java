@@ -17,8 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class CurrencyExchangeController {
 
-  @Autowired
   CurrencyExchangeService currencyExchangeService;
+
+  @Autowired
+  public CurrencyExchangeController(CurrencyExchangeService currencyExchangeService) {
+
+    this.currencyExchangeService = currencyExchangeService;
+
+  }
 
   @HystrixCommand(fallbackMethod = "fallbackFromCurrencyApi")
   @GetMapping()

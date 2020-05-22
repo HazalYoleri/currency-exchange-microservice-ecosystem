@@ -1,6 +1,5 @@
 package com.spring.cloud.exchangeservice.util;
 
-
 public class UrlBuilder {
   private StringBuilder params;
   private StringBuilder base;

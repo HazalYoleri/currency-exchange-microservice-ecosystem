@@ -15,9 +15,14 @@ public class CurrencyExchangeService {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Autowired
-  RestTemplate restTemplate;
+  private RestTemplate restTemplate;
 
+  @Autowired
+  public CurrencyExchangeService(RestTemplate restTemplate) {
+
+    this.restTemplate = restTemplate;
+
+  }
 
   public ExchangeValue getCurrenciesOfToday() {
     String url = new UrlBuilder().addBase(Constants.LATEST_URL).build();
@@ -41,7 +46,7 @@ public class CurrencyExchangeService {
         .addParameter(Constants.BASE, from)
         .addParameter(Constants.SYMBOLS, to)
         .build();
-    logger.info("uri" + url);
+    logger.info("uri --> {}", url);
     return this.restTemplate
         .getForObject(url, ExchangeValue.class);
 
