@@ -3,8 +3,8 @@ package com.spring.cloud.zuulproxy.com.ykb.spring.cloud.zuulproxy.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.http.HttpMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
