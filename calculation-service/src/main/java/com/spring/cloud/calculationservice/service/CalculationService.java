@@ -13,9 +13,9 @@ public class CalculationService {
 
 
   public BigDecimal calculateExchangeResult(CurrencyResult result) {
-    logger.info(new StringBuilder().append("Result :").append(result.getExchangeValue()
+    logger.info("Result : {}", result.getExchangeValue()
         .multiply(result.getRates()
-            .get(result.getConvertedCurrency()))).toString());
+            .get(result.getConvertedCurrency())));
     return result.getExchangeValue()
         .multiply(result.getRates()
             .get(result.getConvertedCurrency()));

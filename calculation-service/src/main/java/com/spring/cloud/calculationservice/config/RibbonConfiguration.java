@@ -10,8 +10,13 @@ import org.springframework.context.annotation.Bean;
 
 public class RibbonConfiguration {
 
+  private IClientConfig ribbonClientConfig;
+
   @Autowired
-  IClientConfig ribbonClientConfig;
+  public RibbonConfiguration(IClientConfig ribbonClientConfig) {
+
+    this.ribbonClientConfig = ribbonClientConfig;
+  }
 
   @Bean
   public IPing ribbonPing(IClientConfig config) {

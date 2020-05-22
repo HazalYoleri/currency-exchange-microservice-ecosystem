@@ -19,14 +19,23 @@ import java.math.BigDecimal;
 @RequestMapping("/exchange")
 @RefreshScope
 public class CalculationController {
+
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Autowired
   private IExchangeServiceFeignClient exchangeServiceFeignClient;
 
+  private CalculationService calculationService;
 
   @Autowired
-  private CalculationService calculationService;
+  public CalculationController(
+      IExchangeServiceFeignClient exchangeServiceFeignClient,
+      CalculationService calculationService) {
+
+    this.exchangeServiceFeignClient = exchangeServiceFeignClient;
+    this.calculationService = calculationService;
+
+  }
+
 
   @PostMapping("/today")
   public String getCalculatedExchangeValue(
@@ -37,6 +46,7 @@ public class CalculationController {
     logger.info("{}", currencyResult);
     return calculationService.calculateExchangeResult(currencyResult).toString();
   }
+
 
   @PostMapping("/historical")
   public BigDecimal getHistoricalExchangeValue(

@@ -24,21 +24,10 @@ public class CurrencyResult {
   }
 
 
-  public String getBase() {
-    return base;
-  }
-
-  public void setBase(String base) {
-    this.base = base;
-  }
-
   public Map<String, BigDecimal> getRates() {
     return rates;
   }
 
-  public void setRates(Map<String, BigDecimal> rates) {
-    this.rates = rates;
-  }
 
   public Date getDate() {
     return date;
