@@ -22,17 +22,17 @@ public class CalculationController {
 
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @Autowired
+
   private IExchangeServiceFeignClient exchangeServiceFeignClient;
 
   private CalculationService calculationService;
 
   @Autowired
   public CalculationController(
-      CalculationService calculationService) {
+      CalculationService calculationService, IExchangeServiceFeignClient exchangeServiceFeignClient) {
 
     this.calculationService = calculationService;
-
+    this.exchangeServiceFeignClient = exchangeServiceFeignClient;
   }
 
 

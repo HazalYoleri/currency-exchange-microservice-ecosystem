@@ -1,0 +1,47 @@
+version: "2.1"
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - "TZ=@timezone@"
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    depends_on:
+      - rabbitmq
+    restart: always
+    ports:
+      - "9411:9411"
+    environment:
+      - "TZ=@timezone@"
+      - "RABBIT_URI=amqp://guest:guest@rabbitmq:5672"
+
+  config-server:
+    build: ./config-server
+    image: hazalyoleri/config-server
+    container_name: config-server
+    hostname: config-server
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  discovery-server:
+   image: hazalyoleri/discovery-server
+   restart: always
+   hostname: discovery-server
+   depends_on:
+    - config-server
+   container_name: discovery-server
+   logging:
+    options:
+       max-size: "10m"
+       max-file: "10"
+   links:
+     - config-server

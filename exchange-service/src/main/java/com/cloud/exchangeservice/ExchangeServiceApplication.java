@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 @SpringBootApplication
+
 public class ExchangeServiceApplication {
   @Bean
   public Sampler defaultSampler() {
