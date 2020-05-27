@@ -1,4 +1,5 @@
 version: "2.1"
+
 services:
   rabbitmq:
     image: rabbitmq:3.7.6-management
@@ -9,9 +10,9 @@ services:
     environment:
       - "TZ=@timezone@"
 
-  zipkin:
+  zipkin-server:
     image: openzipkin/zipkin:latest
-    container_name: zipkin
+    container_name: zipkin-server
     depends_on:
       - rabbitmq
     restart: always
@@ -22,7 +23,6 @@ services:
       - "RABBIT_URI=amqp://guest:guest@rabbitmq:5672"
 
   config-server:
-    build: ./config-server
     image: hazalyoleri/config-server
     container_name: config-server
     hostname: config-server
@@ -36,6 +36,8 @@ services:
    image: hazalyoleri/discovery-server
    restart: always
    hostname: discovery-server
+   ports:
+     - "5555:5555"
    depends_on:
     - config-server
    container_name: discovery-server
@@ -43,5 +45,54 @@ services:
     options:
        max-size: "10m"
        max-file: "10"
-   links:
-     - config-server
+
+  zuul-proxy:
+   image: hazalyoleri/zuul-proxy
+   restart: always
+   hostname: zuul-proxy
+   container_name: zuul-proxy
+   ports:
+     - "8085:8085"
+   depends_on:
+    - config-server
+    - discovery-server
+    - rabbitmq
+    - zipkin-server
+   logging:
+    options:
+     max-size: "10m"
+     max-file: "10"
+
+  exchange-service:
+   image: hazalyoleri/exchange-service
+   restart: always
+   hostname: exchange-service
+   container_name: exchange-service
+   ports:
+    - "8000:8000"
+   depends_on:
+    - config-server
+    - discovery-server
+    - rabbitmq
+    - zipkin-server
+   logging:
+    options:
+     max-size: "10m"
+     max-file: "10"
+
+  calculation-service:
+   image: hazalyoleri/calculation-service
+   restart: always
+   hostname: calculation-service
+   container_name: calculation-service
+   ports:
+    - "8100:8100"
+   depends_on:
+    - config-server
+    - discovery-server
+    - rabbitmq
+    - zipkin-server
+   logging:
+    options:
+     max-size: "10m"
+     max-file: "10"
