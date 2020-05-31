@@ -88,8 +88,12 @@ Example Request:
 
 curl -X POST \
   http://localhost:8085/calculation-service/exchange/today \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'from=USD&to=TRY&value=132&date=2015-12-01'
+  -H 'Content-Type: application/json' \
+  -d '{
+    "from": "USD",
+    "to": "TRY",
+    "value": 1234
+}'
 ```
 
 #### WIP:Swagger Implementation
