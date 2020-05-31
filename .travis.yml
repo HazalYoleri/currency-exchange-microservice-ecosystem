@@ -1,5 +1,12 @@
 language: java
+
+services:
+  - docker
+
 jdk:
  - oraclejdk8
 
 script: mvn package -DskipTests
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS

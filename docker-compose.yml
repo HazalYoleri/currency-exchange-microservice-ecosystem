@@ -26,6 +26,9 @@ services:
     image: hazalyoleri/config-server
     container_name: config-server
     hostname: config-server
+    environment:
+     CONFIG_STORE_USERNAME: "HazalYoleri"
+     CONFIG_STORE_PASSWORD: "Na121319"
     restart: always
     logging:
       options:
