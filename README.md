@@ -4,7 +4,23 @@ Currency Exchange Microservice Ecosystem is a basic example for microservice arc
 
 ## Installation
 
-Docker implementation is on the way :)
+First you should fork this [repo](https://github.com/HazalYoleri/config-store) in order to get configuration from config-server. To connect the config-store to your application, simply add your git password and username to the docker-compose file.
+
+```python
+
+environment:
+     CONFIG_STORE_USERNAME: "gituser"
+     CONFIG_STORE_PASSWORD: "gitpassword"
+     
+```
+
+then;
+```python
+
+docker-compose up -d --build
+     
+```
+
 
 ## Overview
 
@@ -13,6 +29,7 @@ Currency exchange microservices-based system consists of the following technolog
 * ### Zuul Proxy
 
 a module that Spring Cloud Netflix Zuul for running Spring Boot application that acts as a proxy/gateway.
+
 
 
 * ### Config Server
@@ -101,7 +118,7 @@ curl -X POST \
 }'
 ```
 
-#### WIP:Swagger Implementation
+#### WIP:Unit Tests and CI with travis
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
