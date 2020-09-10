@@ -27,8 +27,8 @@ services:
     container_name: config-server
     hostname: config-server
     environment:
-     CONFIG_STORE_USERNAME: "HazalYoleri"
-     CONFIG_STORE_PASSWORD: "Na121319"
+     CONFIG_STORE_USERNAME: "username"
+     CONFIG_STORE_PASSWORD: "password"
     restart: always
     logging:
       options:
